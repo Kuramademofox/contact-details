@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop IT Checkout</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        font-family: quicksand, sans-serif;
+      }
+      .navbar {
+          display: flex;
+          align-items: center;
+          background-color: #3BB77E; /* Green background */
+          padding: 10px;
+      }
+      .navbar .logo {
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+      }
+      .navbar .logo img {
+          height: 30px;
+          margin-right: 10px;
+      }
+      .navbar .logo span {
+          color: white; /* White text color */
+          font-size: 20px;
+          font-weight: bold;
+      }
+      .navbar .search-container {
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
+          background-color: #fff;
+          border-radius: 5px;
+      }
+      .navbar .search-container select,
+      .navbar .search-container input {
+          border: none;
+          outline: none;
+          padding: 10px;
+          height: 40px;
+      }
+      .navbar .search-container select {
+          background-color: #fff;
+          border-right: 1px solid #ccc;
+      }
+      .navbar .search-container input {
+          flex-grow: 1;
+          padding-left: 10px;
+      }
+      .navbar .search-container button {
+          background-color: #fff;
+          border: none;
+          color: #4CAF50;
+          padding: 0 20px;
+          height: 40px;
+          cursor: pointer;
+      }
+      .navbar .icons {
+          display: flex;
+          align-items: center;
+          margin-left: 20px;
+      }
+      .navbar .icons img {
+          width: 24px;
+          height: 24px;
+          margin: 0 10px;
+      }
+      .navbar .profile {
+          margin-left: 20px;
+      }
+      .navbar .profile img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+      }
+        .delivery-address button {
+            background-color: #3BB77E; /* Change this to the desired color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .delivery-address button:hover {
+            background-color: #228B22; /* Darker shade for hover effect */
+        }
+
+      .order-summary,
+      .delivery-address.delivery-address {
+            padding: 20px;
+            margin: 20px 0;
+            border: none; /* Remove border */
+        }
+
+        .separator {
+            border: 1px solid #9CFFACA3; /* Green border */
+            margin: 20px 0; /* Space around the separator */
+        }
+        .explore-section {
+            padding: 20px;
+        }
+
+        .explore-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .explore-header p {
+            font-size: 24px;
+            color: #000000;
+            margin: 0;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+        .explore-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .explore-button {
+            background: none;
+            border: none;
+            color: #3BB77E;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            text-decoration: none;
+        }
+        .apply-button {
+            background-color: transparent;
+            border: 2px solid #3BB77E; /* Green border */
+            color: #3BB77E; /* Green text */
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+        }
+        .apply-button:hover {
+            background-color: #3BB77E; /* Green background on hover */
+            color: white; /* White text on hover */
+        }
+
+
+
+      
+      .newsletter {
+        background-color: #00aeef;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .newsletter input[type="email"] {
+        padding: 10px;
+        width: 300px;
+        margin-right: 10px;
+      }
+      .newsletter input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+      .footer {
+        background-color: #f1f1f1;
+        color: black;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .footer a {
+        color: #4caf50;
+      }
+      .footer img {
+        width: 30px;
+        margin: 5px;
+      }
+      .progress-container {
+        display: flex;
+        align-items: center;
+        font-family: Arial, sans-serif;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+      }
+      .step:not(:last-child)::after {
+        content: '';
+        width: 40px;
+        height: 2px;
+        background-color: gray;
+        margin: 0 10px;
+      }
+      .completed {
+        color: green;
+      }
+      .completed::after {
+        background-color: green;
+      }
+      .step-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: gray;
+        color: white;
+        margin: 0 10px;
+      }
+      .completed .step-icon {
+        background-color: green;
+      }
+      .subscription {
+          background-image: url('images/newsletter\ background.png');
+          background-size: cover;
+          background-position: center;
+          padding: 100px;
+          color: white;
+          text-align: center;
+          border-radius: 50px;
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+      }
+      .subscription h2 {
+          font-size: 24px;
+          margin: 0;
+          flex: 1;
+      }
+      .subscription form {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 10px;
+          flex: 1;
+      }
+      .subscription input {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          width: 100%;
+          max-width: 300px;
+      }
+      .subscription button {
+          padding: 10px;
+          background-color: #274C5B;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+          font-size: 18px;
+      }
+      .subscription button:hover {
+          background-color: #45a049;
+      }
+      .feature-container {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+      }
+      .feature {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          max-width: 300px;
+          text-align: left;
+      }
+      .feature img {
+          width: 50px;
+          height: 50px;
+          margin-right: 10px;
+      }
+      .feature h3 {
+          font-size: 20px;
+          margin: 10px 0;
+      }
+      footer {
+          background-color: #ffffff;
+          padding: 40px 20px;
+          border-top: 1px solid #ccc;
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin-top: auto;
+      }
+      .footer-top {
+          background: rgba(255, 255, 255, 1);
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          max-width: 1200px;
+          margin: 0 auto;
+          gap: 20px;
+          padding-bottom: 20px;
+      }
+      .footer-top div {
+          flex: 1;
+          min-width: 200px;
+      }
+      .footer-top h4 {
+          font-size: 1.2em;
+          margin-bottom: 10px;
+      }
+      .footer-top ul {
+          list-style-type: none;
+          padding: 0;
+      }
+      .footer-top li {
+          margin-bottom: 10px;
+          font-size: 0.9em;
+      }
+      .footer-top a {
+          text-decoration: none;
+          color: #000;
+      }
+      .footer-top a:hover {
+          text-decoration: underline;
+      }
+      .footer-bottom {
+
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding-top: 20px;
+          border-top: 1px solid #ccc;
+          font-size: 0.8em;
+          text-align: center;
+      }
+      .footer-bottom p {
+          margin: 0;
+      }
+      .social-links {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+      }
+
+      .social-links a {
+          display: inline-block;
+          margin-left: 10px;
+          color: #3BB77E;
+          text-decoration: none;
+          font-size: 25px; /* Increase the font size */
+      }
+
+      .social-links a:hover {
+          color: #339966;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1024px) {
+          .faq-item button {
+              font-size: 16px;
+          }
+      }
+      @media (max-width: 768px) {
+          .content {
+              flex-direction: column;
+          }
+          .faq, .contact-form {
+              flex: 1 1 100%;
+          }
+          .contact-form label {
+              font-size: 14px;
+          }
+          .contact-form button {
+              font-size: 16px;
+          }
+          .subscription {
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+          }
+          .subscription h2, .subscription form {
+              flex: 1 1 100%;
+          }
+          .subscription form {
+              justify-content: center;
+              width: 100%;
+          }
+          .subscription input, .subscription button {
+              width: 100%;
+              max-width: none;
+          }
+      }
+      @media (max-width: 480px) {
+          .faq-item button {
+              font-size: 14px;
+              padding: 8px;
+          }
+          .contact-form input, .contact-form textarea {
+              font-size: 14px;
+          }
+          .contact-form button {
+              font-size: 16px;
+              padding: 8px;
+          }
+          .subscription input, .subscription button {
+              font-size: 14px;
+              padding: 8px;
+          }
+          .payment-icons {
+              display: flex;
+              justify-content: center;
+              flex-grow: 1;
+          }
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">
+          <img src="https://via.placeholder.com/30" alt="Grocery Mart Logo">
+          <span>Drop It</span>
+      </div>
+      <div class="search-container">
+          <select>
+              <option>All Categories</option>
+          </select>
+          <input type="text" placeholder="Search for items...">
+          <button>
+            <img src="images/Search-btn.png" alt="Search Icon">
+          </button>
+      </div>
+      <div class="icons">
+          <img src="https://via.placeholder.com/24" alt="Heart Icon">
+          <img src="https://via.placeholder.com/24" alt="Cart Icon">
+      </div>
+      <div class="profile">
+          <img src="https://via.placeholder.com/40" alt="User Profile">
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 order-summary">
+          <h2>Order Summary</h2>
+          <div>
+            <p>Tomato <span>$65.00</span></p>
+            <p>Tomato <span>$95.00</span></p>
+            <p>Gift Card / Discount code</p>
+            <input type="text" />
+              <button class="apply-button">Apply</button>
+
+            <hr />
+            <p>Subtotal: <span>$160.00</span></p>
+            <p>Sales tax (6.5%): <span>$4.23</span></p>
+            <p>Shipping Fee: <span>FREE</span></p>
+            <hr />
+            <p class="total-due">Total due: <span>$164.23</span></p>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="progress-container">
+            <div class="step completed">
+              <div>Delivery Address</div>
+              <div class="step-icon">✓</div>
+            </div>
+            <div class="step">
+              <div>Payment</div>
+            </div>
+          </div>
+          <div class="delivery-address">
+            <h2>Delivery Address</h2>
+            <form>
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Flat/House no.</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>City</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>State</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Postal Code</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label>Famous Landmark</label>
+                <input type="text" class="form-control" />
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" />
+                <label class="form-check-label">My shipping and Billing address are the same</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Continue</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explore-section">
+        <div class="explore-header">
+            <p>Explore</p>
+            <div class="explore-buttons">
+                <a href="index.html" class="explore-button">All</a>
+                <a href="vegetables.html" class="explore-button">Vegetables</a>
+                <a href="fruits.html" class="explore-button">Fruits</a>
+                <a href="stationery.html" class="explore-button">Stationery</a>
+                <a href="home_needs.html" class="explore-button">Home Needs</a>
+            </div>
+        </div>
+        <div class="categories">
+            <button class="arrow left-arrow"><i class="fa-solid fa-chevron-left"></i></i></button>
+            <div class="category-list">
+                <div class="category-item" style="background-color: #FEEFEA;">
+                    <img src="./assets/fruits.png" alt="Fruits & Vegetables">
+                    <p>Fruits & Vegetables</p>
+                    <span>20 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #FFF3FF;">
+                    <img src="./assets/masala.png" alt="Masala & Dry Fruits">
+                    <p>Masala & Dry Fruits</p>
+                    <span>220 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #F2FCE4;">
+                    <img src="./assets/frozen_food.png" alt="Frozen Food & Ice Creams">
+                    <p>Frozen Food & Ice Creams</p>
+                    <span>10 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #FEEFEA;">
+                    <img src="./assets/packaged.png" alt="Packaged Food">
+                    <p>Packaged Food</p>
+                    <span>40 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #ECFFEC;">
+                    <img src="./assets/juice.png" alt="Cool Drinks & Juices">
+                    <p>Cool Drinks & Juices</p>
+                    <span>23 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #FFFCEB;">
+                    <img src="./assets/electrical.png" alt="Electrical & Accessories">
+                    <p>Electrical & Accessories</p>
+                    <span>3 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #DEF9EC;">
+                    <img src="./assets/stationery.png" alt="Stationery & Crafts">
+                    <p>Stationery & Crafts</p>
+                    <span>9 Items</span>
+                </div>
+                <div class="category-item" style="background-color: #ECFFEC;">
+                    <img src="./assets/juice.png" alt="Cool Drinks & Juices">
+                    <p>Cool Drinks & Juices</p>
+                    <span>23 Items</span>
+                </div>
+
+            </div>
+
+            <button class="arrow right-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="subscription">
+      <h2>Subscribe to our Newsletter</h2>
+      <form action="#" method="post">
+          <input type="email" name="email" placeholder="Your Email Address" required>
+          <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <div class="feature-container">
+      <div class="feature">
+          <img src="images/Best Prices & Deals.png" alt="Deals">
+          <div>
+              <h3>Best Prices & Deals</h3>
+              <p>Don't miss our daily amazing deals and prices</p>
+          </div>
+      </div>
+      <div class="feature">
+          <img src="images/re" alt="Refund">
+          <div>
+              <h3>Refundable</h3>
+              <p>If your items have damage we agree to refund it</p>
+          </div>
+      </div>
+      <div class="feature">
+          <img src="images/Free delivery.png" alt="Free Delivery">
+          <div>
+              <h3>Free Delivery</h3>
+              <p>Do purchase over $50 and get free delivery anywhere</p>
+          </div>
+      </div>
+    </div>
+    </div>
+    <footer>
+    <div class="footer-top">
+      <div>
+          <h4>Drop It</h4>
+          <img src="images/logo.png" alt="Logo" style="width: 30px; height: 30px;">
+          <ul>
+              <li><a href="#">Company Information</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Store Locations</a></li>
+              <li><a href="#">Affiliate Program</a></li>
+          </ul>
+      </div>
+      <div>
+          <h4>Customer Service</h4>
+          <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Order Tracking</a></li>
+              <li><a href="#">Returns & Exchanges</a></li>
+              <li><a href="#">Shipping & Delivery</a></li>
+          </ul>
+      </div>
+      <div>
+          <h4>Quick Links</h4>
+          <ul>
+              <li><a href="#">New Arrivals</a></li>
+              <li><a href="#">Best Sellers</a></li>
+              <li><a href="#">Special Offers</a></li>
+              <li><a href="#">Gift Cards</a></li>
+          </ul>
+      </div>
+      <div>
+          <h4>Help Center</h4>
+          <ul>
+              <li><a href="#">Payments</a></li>
+              <li><a href="#">Refund</a></li>
+              <li><a href="#">Checkout</a></li>
+              <li><a href="#">Q&A</a></li>
+              <li><a href="#">Privacy Policy</a></li>                
+          </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="display: flex; align-items: center;">
+          <p>&copy; 2024 Grocery Mart. All rights reserved. | <a href="#">Privacy Policy</a></p>
+
+      </div>
+      <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    </footer>
+  </body>
+</html>
